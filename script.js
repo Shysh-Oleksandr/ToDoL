@@ -29,7 +29,7 @@ function addTodo(todo) {
             todoEl.classList.add("completed");
         }
 
-        todoEl.innerText = todoText;
+        todoEl.innerHTML = `${todoText} <span class="delete-icon"><i class="fas fa-times"></i></span>`;
 
         todoEl.addEventListener('click', () => {
             todoEl.classList.toggle('completed');
@@ -39,6 +39,14 @@ function addTodo(todo) {
         todoEl.addEventListener('contextmenu', (e) => {
             e.preventDefault();
 
+            todoEl.remove();
+            updateLS();
+        });
+
+        let deleteBtn = todoEl.querySelector(".delete-icon");
+
+        deleteBtn.addEventListener('click', () => {
+            console.log('remove');
             todoEl.remove();
             updateLS();
         });
