@@ -46,7 +46,6 @@ function addTodo(todo) {
         let deleteBtn = todoEl.querySelector(".delete-icon");
 
         deleteBtn.addEventListener('click', () => {
-            console.log('remove');
             todoEl.remove();
             updateLS();
         });
@@ -62,13 +61,11 @@ function addTodo(todo) {
 function updateLS() {
     const todosEl = document.querySelectorAll("li");
 
-    const todos = [];
-
-    todosEl.forEach(todoEl => {
-        todos.push({
+    const todos = [...todosEl].map(function(todoEl) {
+        return {
             text: todoEl.innerText,
             completed: todoEl.classList.contains('completed')
-        })
+        }
     });
 
     localStorage.setItem('todos', JSON.stringify(todos));
